@@ -1,0 +1,65 @@
+<mat-toolbar>Vital Signs</mat-toolbar>
+
+<form class="example-container" [formGroup]="form" #frmVitalSign="ngForm" (submit)="operate()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idVitalSign">
+        </mat-form-field>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <mat-form-field style="width:50%">
+                    <input type="text" placeholder="Patient" matInput [matAutocomplete]="autoPatient"
+                        [formControl]="patientControl" formControlName="patient">
+
+                    <mat-autocomplete #autoPatient="matAutocomplete" [displayWith]="showPatient">
+                        <mat-option *ngFor="let p of patientsFiltered$ | async" [value]="p">
+                            {{p.firstName}} {{p.lastName}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </td>
+            <td>
+                <button mat-raised-button color="primary" type="button" (click)="openDialog()">
+                    <mat-icon>add_box</mat-icon>
+                    <span>New Patient</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+    <mat-form-field appearance="fill">
+        <mat-label>Taken Date</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="takenDate">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Temperature" required max="100" type="number" formControlName="temperature">
+        <small *ngIf="f['temperature'].errors?.['required'] && f['temperature'].touched" class="invalid">Is
+            required</small>
+        <small *ngIf="f['temperature'].errors?.['max'] && f['temperature'].touched" class="invalid">Max is
+            100</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pulse" required max="1000" type="number" formControlName="pulse">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Respiratory Rate" required max="1000" type="number" formControlName="respiratoryRate">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmVitalSign.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/vitalsign">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

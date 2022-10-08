@@ -1,0 +1,25 @@
+<mat-toolbar>Charts, PDF and Image</mat-toolbar>
+
+<button mat-button color="primary" (click)="change('line')">Line</button>
+<button mat-button color="primary" (click)="change('bar')">Bar</button>
+<button mat-button color="primary" (click)="change('doughnut')">Doughnut</button>
+<button mat-button color="primary" (click)="change('radar')">Radar</button>
+<button mat-button color="primary" (click)="change('pie')">Pie</button>
+
+<div [hidden]="!chart">
+    <canvas id="canvas">{{chart}}</canvas>
+</div>
+
+<button mat-button color="primary" (click)="viewReport()">View PDF</button>
+<button mat-button color="primary" (click)="downloadReport()">Download PDF</button>
+
+<pdf-viewer *ngIf="pdfSrc" [src]="pdfSrc" [render-text]="true" style="width: 800px; height: 800px"></pdf-viewer>
+
+<input id="flFile" type="file" style="display: none;" (change)="selectFile($event)">
+<button mat-button color="primary" onclick="document.getElementById('flFile').click();">Add File</button>
+<p>The file is: {{filename}}</p>
+
+<button mat-button color="primary" (click)="upload()" [disabled]="!selectedFiles">Upload</button>
+
+<img mat-card-image [src]="imageData">
+

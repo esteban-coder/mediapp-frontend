@@ -1,0 +1,81 @@
+<mat-toolbar>Consult Register 1</mat-toolbar>
+
+<div class="example-container">
+    <mat-form-field>
+        <mat-select placeholder="Select Patient" [(ngModel)]="idPatientSelected">
+            <mat-option *ngFor="let p of (patients$ | async)" [value]="p.idPatient">
+                {{p.firstName}} {{p.lastName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Select Medic" [(ngModel)]="idMedicSelected" > <!-- (selectionChange)="getCountries()" -->
+            <mat-option *ngFor="let p of (medics$ | async)" [value]="p.idMedic">
+                {{p.firstName}} {{p.lastName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Select Specialty" [(ngModel)]="idSpecialtySelected" >
+            <mat-option *ngFor="let p of (specialties$ | async)" [value]="p.idSpecialty">
+                {{p.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>   
+
+    <mat-form-field appearance="fill">
+        <mat-label>Select a date</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="maxDate" [(ngModel)]="dateSelected">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Diagonsis" [(ngModel)]="diagnosis">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Treatment" [(ngModel)]="treatment">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addDetail()">Add Detail</button>
+
+    <mat-expansion-panel *ngFor="let det of details; let i=index">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+               {{i + 1}}  {{det.diagnosis}}
+            </mat-panel-title>
+            <mat-panel-description>
+                View Treatment
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+            <textarea matInput placeholder="Treatment" value="{{det.treatment}}"></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="warn" (click)="removeDetail(i)">Remove</button>
+    </mat-expansion-panel>
+
+    <mat-form-field>
+        <mat-select placeholder="Select Exam" [(ngModel)]="idExamSelected">
+            <mat-option *ngFor="let p of (exams$ | async)" [value]="p.idExam">
+                {{p.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addExam()">Add Exam</button>
+
+    <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let ex of examsSelected; let i = index">
+            {{i + 1}} {{ ex.name }}
+        </mat-list-item>
+    </mat-list>
+
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+    
+</div>

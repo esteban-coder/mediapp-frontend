@@ -1,0 +1,19 @@
+<div>
+    <mat-form-field>
+        <input matInput placeholder="FirstName" [(ngModel)]="medic.firstName">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="LastName" [(ngModel)]="medic.lastName">
+    </mat-form-field>
+    <mat-form-field>
+        <!-- no ponemos type="number" porque no valida al 100% minlength ni maxlength, y ademas con maxlength no restringe seguir escribiendo indefinidamente" -->
+        <!-- apesar de restringirlo a 12 la longitud exacta, si escribo 'abc' o '123', y grabo, lo hace; tendria que validar manualmente con if's -->
+        <input matInput placeholder="CMP" [(ngModel)]="medic.cmp" required minlength="12" maxlength="12">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Photo" [(ngModel)]="medic.photoUrl">
+    </mat-form-field>
+    <img mat-card-image [src]="medic.photoUrl" alt="" width="50%" height="50%" *ngIf="medic.photoUrl">
+</div>
+<button mat-raised-button color="primary" (click)="operate()">Done</button>
+<button mat-raised-button color="accent" (click)="close()">Cancel</button>

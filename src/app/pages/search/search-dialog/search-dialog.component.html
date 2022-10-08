@@ -1,0 +1,26 @@
+<h2 class="mat-h2">Patient: {{consult.patient.firstName}} | Date: {{consult.consultDate | date:'dd-MM-yyyy'}}
+</h2>
+
+<mat-card class="example-card" *ngFor="let d of consult.details">
+    <mat-card-header>
+        <mat-card-title>DIAGNOSIS</mat-card-title>
+        <mat-card-subtitle>{{d.diagnosis}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{d.treatment}}
+        </p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="example-card" *ngFor="let ce of exams">
+    <mat-card-header>
+        <mat-card-title>EXAMS</mat-card-title>
+        <mat-card-subtitle>{{ce.exam.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{ce.exam.description}}
+        </p>
+    </mat-card-content>
+</mat-card>

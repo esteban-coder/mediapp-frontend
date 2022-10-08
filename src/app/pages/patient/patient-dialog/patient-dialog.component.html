@@ -1,0 +1,28 @@
+<mat-toolbar>New Patient</mat-toolbar>
+
+<form [formGroup]="form" #frmPatient="ngForm" (submit)="save()">
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idPatient">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="FirstName" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="LastName" formControlName="lastName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Telephone" required minlength="9" formControlName="phone">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="DNI" required maxlength="8" formControlName="dni">
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmPatient.invalid">Done</button>
+    <button mat-raised-button color="accent" type="button" (click)="close()">Cancel</button>
+</form>

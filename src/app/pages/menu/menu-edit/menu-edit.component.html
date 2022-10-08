@@ -1,0 +1,42 @@
+<form class="example-container" [formGroup]="form" #frmMenu="ngForm" (submit)="operate()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idMenu">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" minlength="3" required formControlName="name">  
+        <small *ngIf="f['name'].errors?.['required'] && f['name'].touched" class="invalid">Is required</small>
+        <small *ngIf="f['name'].errors?.['minlength'] && f['name'].touched" class="invalid">Minlength is 3</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Icon" minlength="3" required formControlName="icon">  
+        <small *ngIf="f['icon'].errors?.['required'] && f['icon'].touched" class="invalid">Is required</small>
+        <small *ngIf="f['icon'].errors?.['minlength'] && f['icon'].touched" class="invalid">Minlength is 3</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Url" minlength="3" required formControlName="url">  
+        <small *ngIf="f['url'].errors?.['required'] && f['url'].touched" class="invalid">Is required</small>
+        <small *ngIf="f['url'].errors?.['minlength'] && f['url'].touched" class="invalid">Minlength is 3</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Order Menu" required max="100000" type="number" formControlName="ordermenu">  
+        <small *ngIf="f['ordermenu'].errors?.['required'] && f['ordermenu'].touched" class="invalid">Is required</small>
+        <small *ngIf="f['ordermenu'].errors?.['max'] && f['ordermenu'].touched" class="invalid">Max is 100000</small>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmMenu.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/menu">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

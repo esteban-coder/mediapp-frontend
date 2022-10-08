@@ -1,0 +1,46 @@
+<form class="example-container" [formGroup]="form" #frmPatient="ngForm" (submit)="operate()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idPatient">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="FirstName" minlength="3" required formControlName="firstName">  
+        <small *ngIf="f['firstName'].errors?.['required'] && f['firstName'].touched" class="invalid">Is required</small>
+        <small *ngIf="f['firstName'].errors?.['minlength'] && f['firstName'].touched" class="invalid">Minlength is 3</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="LastName" minlength="3" required formControlName="lastName">  
+        <small *ngIf="f['lastName'].errors?.['required'] && f['lastName'].touched" class="invalid">Is required</small>
+        <small *ngIf="f['lastName'].errors?.['minlength'] && f['lastName'].touched" class="invalid">Minlength is 3</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="DNI" maxlength="8" minlength="8" required formControlName="dni">  
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Address" formControlName="address">          
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="phone" maxlength="9" minlength="9" required formControlName="phone">  
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="email" required formControlName="email">  
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmPatient.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/patient">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>
